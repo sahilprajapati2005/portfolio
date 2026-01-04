@@ -27,8 +27,8 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
-      // Connect to your local backend
-      const response = await axios.post('http://localhost:5000/api/chat', {
+      // Connect to backend using the relative path (handled by Vite proxy)
+      const response = await axios.post('/api/chat', {
         message: userMessage
       });
 

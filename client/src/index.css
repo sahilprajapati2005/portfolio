@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* All other styles come AFTER the import */
 
 body {
   background-color: #f3f4f6; /* Light gray background */
