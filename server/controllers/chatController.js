@@ -9,41 +9,35 @@ const chatWithGemini = async (req, res) => {
   try {
     const { message } = req.body;
 
-    // --- DEBUGGING CHECKS ---
-    // 1. Check if API Key exists
+    // 1. Validation
     if (!process.env.GEMINI_API_KEY) {
-      console.error("❌ ERROR: GEMINI_API_KEY is missing from .env file");
-      return res.status(500).json({ error: "Server Configuration Error: API Key Missing" });
+      console.error("❌ ERROR: GEMINI_API_KEY is missing.");
+      return res.status(500).json({ error: "API Key Missing" });
     }
 
-    // 2. Check if message exists
     if (!message) {
       return res.status(400).json({ error: "Message is required" });
     }
 
-    console.log("📩 Received Message:", message);
+    console.log("📩 User asked:", message);
 
-    // --- AI CONFIGURATION ---
-    // Using 'gemini-1.5-flash' because it is faster and more stable than 'gemini-pro'
+    // 2. Initialize Model (UPDATED to Gemini 2.5)
     const model = new ChatGoogleGenerativeAI({
-      model: "gemini-1.5-flash", 
+      model: "gemini-2.5-flash", // <--- UPDATED: Old models are retired!
       apiKey: process.env.GEMINI_API_KEY,
       temperature: 0.7,
     });
 
-    // --- PROMPT ---
+    // 3. Prompt
     const prompt = PromptTemplate.fromTemplate(`
-      You are an AI assistant for a portfolio website belonging to Sahil Prajapati.
-      Your goal is to answer questions strictly based on Sahil's resume and project details provided below.
-
-      Context about Sahil:
+      You are an AI assistant for Sahil Prajapati. 
+      Answer strictly based on this context:
       {context}
 
-      User Question: {question}
-      Answer:
+      Question: {question}
     `);
 
-    // --- EXECUTION ---
+    // 4. Execution
     const chain = prompt.pipe(model).pipe(new StringOutputParser());
     
     const response = await chain.invoke({
@@ -51,17 +45,16 @@ const chatWithGemini = async (req, res) => {
       question: message,
     });
 
-    console.log("✅ AI Responded Successfully");
+    console.log("✅ AI Answered:", response);
     res.json({ reply: response });
 
   } catch (error) {
-    // --- ERROR LOGGING ---
-    // This prints the REAL error to your VS Code Terminal
-    console.error("❌ Gemini Chat Error Details:", error); 
+    console.error("❌ GEMINI ERROR:", error);
     
+    // Fallback: If 2.5 fails, suggest updating libraries
     res.status(500).json({ 
       error: "AI Service Failed", 
-      details: error.message || "Unknown Error" 
+      details: error.message 
     });
   }
 };
