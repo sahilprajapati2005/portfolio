@@ -1,27 +1,45 @@
 @import "tailwindcss";
 
+/* 1. Reset defaults to remove white borders */
+:root {
+  background-color: #0f172a; /* Deep Navy */
+}
+
 @layer base {
-  body {
-    @apply bg-gray-50 text-gray-900 antialiased font-sans;
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0f172a; /* Force Dark Background everywhere */
+    color: #e2e8f0;            /* Default Text Color */
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;        /* Prevents horizontal scrolling/white gaps */
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0f172a;
   }
 }
 
-/* Smooth Scrolling */
+/* 2. Smooth Scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom Scrollbar */
+/* 3. Dark Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #0f172a; 
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1; 
+  background: #334155; 
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8; 
+  background: #475569; 
 }

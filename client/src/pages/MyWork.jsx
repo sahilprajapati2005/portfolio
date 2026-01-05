@@ -1,111 +1,118 @@
 import React from 'react';
-import { Github, ExternalLink } from 'lucide-react'; // Ensure you have lucide-react installed
+import { Github, ExternalLink, Code } from 'lucide-react';
 
 const projects = [
   {
     id: 1,
-    title: "Course Selling Platform",
+    title: "Vidhya Setu (Course Platform)",
     desc: "A comprehensive MERN stack platform for buying and managing video courses. Features include role-based authentication, video streaming, and payment integration.",
-    tags: ["MERN Stack", "Redux", "Razorpay", "Cloudinary"],
+    tags: ["MERN Stack", "Redux", "Razorpay"],
     github: "https://github.com/sahilprajapati2005/course.git",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Coding/LMS image
+    live: "https://vidhyaasetu.netlify.app",
+    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Education"
   },
   {
     id: 2,
     title: "Job Portal Application",
     desc: "A bridge between job seekers and recruiters. Allows users to post jobs, apply for positions, and manage profiles with advanced filtering options.",
-    tags: ["React.js", "Node.js", "Express", "MongoDB"],
+    tags: ["React.js", "Node.js", "MongoDB"],
     github: "https://github.com/sahilprajapati2005/job.git",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Job/Office image
+    live: "https://job-smoky-seven.vercel.app",
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Business"
   },
   {
     id: 3,
-    title: "Real-time Social Media App",
+    title: "Real-time Social Media",
     desc: "A dynamic social platform featuring real-time messaging using Socket.io, media sharing, and JWT-based secure authentication.",
-    tags: ["Socket.io", "React", "JWT", "Tailwind CSS"],
+    tags: ["Socket.io", "React", "JWT"],
     github: "https://github.com/sahilprajapati2005/social-media.git",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Social Media/Mobile image
+    live: "https://social-app-8b2s.onrender.com",
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     category: "Social"
   }
 ];
 
 const MyWork = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-20 px-4 sm:px-6 lg:px-8">
+    // Matches Global Background (#0f172a)
+    <div className="min-h-screen py-24 px-4 sm:px-6 lg:px-8 bg-[#0f172a]">
       <div className="max-w-7xl mx-auto">
         
         {/* Header Section */}
         <div className="text-center mb-16 space-y-4">
-          <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">Portfolio</h2>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-            Featured Projects
+          <h2 className="text-cyan-400 font-semibold tracking-wider uppercase text-sm">Portfolio</h2>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white">
+            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Work</span>
           </h1>
-          <p className="text-xl text-gray-500 max-w-3xl mx-auto">
-            A selection of technical solutions I've built to solve real-world problems using the MERN stack.
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+            Check out my deployed applications. Click "Live Demo" to visit the websites.
           </p>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
             <div 
               key={project.id} 
-              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 flex flex-col"
+              // UPDATED CARD STYLE: bg-slate-900 border-slate-800 (Matches About Page)
+              className="bg-slate-900 rounded-3xl overflow-hidden shadow-lg border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 flex flex-col group hover:-translate-y-2"
             >
-              {/* Image Section */}
-              <div className="relative h-56 overflow-hidden group">
+              
+              {/* Image */}
+              <a href={project.live} target="_blank" rel="noopener noreferrer" className="relative h-48 overflow-hidden block">
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                  <span className="text-white font-medium text-sm">{project.category}</span>
+                <div className="absolute top-4 right-4 bg-slate-950/90 backdrop-blur-sm px-3 py-1 rounded-full border border-slate-700">
+                  <span className="text-cyan-400 text-xs font-bold tracking-wider">{project.category}</span>
                 </div>
-              </div>
+              </a>
 
-              {/* Content Section */}
-              <div className="p-8 flex-1 flex flex-col">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+              {/* Content */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-600 mb-6 leading-relaxed flex-1">
+                <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
                   {project.desc}
                 </p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag) => (
                     <span 
                       key={tag} 
-                      className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wide rounded-full"
+                      className="px-2 py-1 bg-slate-800 text-cyan-200 text-xs font-medium rounded-md border border-slate-700"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                {/* Footer / Links */}
-                <div className="pt-6 border-t border-gray-100 flex items-center justify-between mt-auto">
+                {/* Buttons */}
+                <div className="flex items-center gap-3 mt-auto pt-4 border-t border-slate-800">
                   <a 
                     href={project.github} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-gray-700 font-medium hover:text-black transition-colors"
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-medium text-sm hover:bg-slate-700 hover:text-white transition-all border border-slate-700"
                   >
-                    <Github size={20} />
-                    <span>Source Code</span>
+                    <Github size={18} /> Code
                   </a>
                   
-                  {/* Optional Live Demo Link (if you have one) */}
-                  {/* <a href="#" className="flex items-center gap-2 text-blue-600 font-medium hover:text-blue-800 transition-colors">
-                    <ExternalLink size={20} />
-                    <span>Live Demo</span>
-                  </a> 
-                  */}
+                  <a 
+                    href={project.live} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-cyan-600 text-white font-medium text-sm hover:bg-cyan-500 transition-all shadow-lg shadow-cyan-900/20"
+                  >
+                    <ExternalLink size={18} /> Demo
+                  </a>
                 </div>
               </div>
             </div>
