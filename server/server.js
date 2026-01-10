@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors({
   origin: [
-    "http://localhost:5173",               // Allows your local Vite app
+    "http://localhost:5173",       
+    "https://sahilportfolio-nine.vercel.app",        // Allows your local Vite app
     "https://sahilprajapatiportfolio.vercel.app/",   // <--- REPLACE THIS with your actual Netlify URL
     // Add any other frontend URLs you have here
   ],
