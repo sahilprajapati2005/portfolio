@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { Send, X, Loader2, MessageSquare, Sparkles, User, Bot } from "lucide-react";
+import { Send, X, Loader2, Sparkles, User, Bot } from "lucide-react";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,12 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("/api/chat", { message: input });
+      // FIX: Use environment variable for the API URL
+      // If VITE_API_URL is set (production), use it.
+      // If not (local dev), default to "" which uses the vite proxy /api path.
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      
+      const response = await axios.post(`${apiUrl}/api/chat`, { message: input });
       const botMessage = { text: response.data.reply, sender: "bot" };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
