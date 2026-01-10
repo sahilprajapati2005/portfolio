@@ -25,7 +25,18 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("/api/chat", { message: input });
+      // ---------------------------------------------------------
+      // FIX START: Use Environment Variable for Backend URL
+      // ---------------------------------------------------------
+      // 1. In Production (Vercel): This uses the variable you set in Settings.
+      // 2. In Development (Localhost): It defaults to "" and uses the proxy.
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      
+      const response = await axios.post(`${apiUrl}/api/chat`, { message: input });
+      // ---------------------------------------------------------
+      // FIX END
+      // ---------------------------------------------------------
+
       const botMessage = { text: response.data.reply, sender: "bot" };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
@@ -37,7 +48,6 @@ const Chatbot = () => {
     }
   };
 
-  
   const handleKeyPress = (e) => {
     if (e.key === "Enter") handleSend();
   };
